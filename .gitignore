@@ -1,20 +1,16 @@
 # Dependencies
 node_modules/
-venv/
-.venv/
-__pycache__/
-*.pyc
 
 # Environment
 .env
 .env.local
 
-# Build output
-dist/
-build/
-*.log
+# Generated audio
+output/*
+!output/.gitkeep
 
-# OS files
+# Logs & OS files
+*.log
 .DS_Store
 Thumbs.db
 

@@ -1,0 +1,21 @@
+{
+  "name": "tts",
+  "version": "1.0.0",
+  "description": "Text-to-Speech app using Microsoft Edge TTS",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "tts": "node src/cli.js"
+  },
+  "keywords": [
+    "tts",
+    "text-to-speech",
+    "edge-tts"
+  ],
+  "author": "veer251",
+  "license": "MIT",
+  "dependencies": {
+    "msedge-tts": "^1.3.0"
+  }
+}
