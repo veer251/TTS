@@ -1,19 +1,27 @@
 # Dependencies
-node_modules/
+/node_modules
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production build
+/build
 
 # Environment
-.env
-.env.local
+.env*.local
 
-# Generated audio
-output/*
-!output/.gitkeep
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Logs & OS files
-*.log
+# TypeScript
+*.tsbuildinfo
+
+# OS / editor
 .DS_Store
 Thumbs.db
-
-# Editor
 .vscode/
 .idea/

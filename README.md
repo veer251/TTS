@@ -1,20 +1,30 @@
-# TTS
+# TTS Platform
 
-A simple Text-to-Speech app using **Microsoft Edge TTS** (via the [`msedge-tts`](https://www.npmjs.com/package/msedge-tts) npm library). Free, no API key needed.
+A Text-to-Speech web app built with **Next.js (App Router) + TypeScript**, using **Microsoft Edge TTS** via the [`msedge-tts`](https://www.npmjs.com/package/msedge-tts) npm library. Free, no API key needed.
 
 ## Project structure
 
 ```
 TTS/
-├── src/
-│   ├── index.js    # example: generate one audio file
-│   ├── cli.js      # command-line usage
-│   ├── tts.js      # Edge TTS wrapper (synthesize, listVoices)
-│   └── config.js   # voice, rate, pitch, output settings
-├── output/         # generated audio files (gitignored)
+├── app/
+│   ├── api/tts/route.ts   # POST endpoint that returns MP3 audio
+│   ├── globals.css        # global styles
+│   ├── layout.tsx         # root layout
+│   └── page.tsx           # home page
+├── components/
+│   └── TTSForm.tsx        # client UI: text input, voice picker, player
+├── lib/
+│   └── tts.ts             # server-side Edge TTS helper
+├── types/
+│   └── index.ts           # shared TypeScript types
+├── public/                # static assets
+├── .env.local             # local env vars (gitignored)
+├── next.config.ts
 ├── package.json
-└── README.md
+└── tsconfig.json
 ```
+
+> `node_modules/` is created automatically by `npm install` — it is not committed.
 
 ## Setup
 
@@ -22,25 +32,25 @@ TTS/
 npm install
 ```
 
-## Usage
-
-Run the example:
+## Run (development)
 
 ```bash
+npm run dev
+```
+
+Then open http://localhost:3000
+
+## Build & start (production)
+
+```bash
+npm run build
 npm start
 ```
 
-Generate speech from the command line:
+## How it works
 
-```bash
-npm run tts -- "Hello world"
-npm run tts -- "Assalam o alaikum" salam ur-PK-AsadNeural
-```
+- The browser sends text + voice to `POST /api/tts`.
+- The server ([`lib/tts.ts`](lib/tts.ts)) generates MP3 audio with Edge TTS and streams it back.
+- The UI plays the returned audio.
 
-Arguments: `"text"` `[outputName]` `[voice]`
-
-## Configuration
-
-Edit [`src/config.js`](src/config.js) to change the default voice, rate, pitch, and output folder.
-
-Common voices: `en-US-AriaNeural`, `en-US-GuyNeural`, `en-GB-SoniaNeural`, `ur-PK-AsadNeural`, `ur-PK-UzmaNeural`, `hi-IN-SwaraNeural`.
+Available voices are listed in [`components/TTSForm.tsx`](components/TTSForm.tsx) — e.g. `en-US-AriaNeural`, `ur-PK-AsadNeural`, `hi-IN-SwaraNeural`.
